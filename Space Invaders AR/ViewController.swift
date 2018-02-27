@@ -10,9 +10,17 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
-
+class ViewController: UIViewController {
+    
+    // MARK: - Outlets
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+    // MARK: - Properties
+    
+    var level: Level?
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +30,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -51,30 +54,50 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
-    // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
+    // MARK: - Actions
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
+    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+        if let level = level {
+            level.tap()
+        }
     }
     
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
 }
+
+// MARK: - LevelDelegate
+
+extension ViewController: LevelDelegate {
+    
+    var playerPosition: SCNVector3 {
+        guard let cameraPosition = sceneView.session.currentFrame?.camera.transform.position else {
+            return SCNVector3Zero
+        }
+        return cameraPosition
+    }
+    
+}
+
+// MARK: - ARSessionDelegate
+
+extension ViewController: ARSessionDelegate {
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        switch camera.trackingState {
+        case .normal:
+            print("Ready")
+            if level == nil {
+                level = Level()
+                level!.delegate = self
+                sceneView.scene = level!
+            }
+        default:
+            print("Not ready")
+        }
+    }
+    
+}
+
+// MARK: - ARSCNViewDelegate
+
+extension ViewController: ARSCNViewDelegate {}
