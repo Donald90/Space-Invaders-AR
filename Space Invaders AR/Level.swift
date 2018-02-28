@@ -73,6 +73,7 @@ extension Level: SCNPhysicsContactDelegate {
         if let enemy = enemy {
             SCNParticleSystem.build(for: self, explode: enemy, at: contact.contactPoint)
             enemy.removeFromParentNode()
+            playerScore.score += 1
         }
     }
     
