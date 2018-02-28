@@ -28,6 +28,7 @@ class Level: SCNScene {
     init(playerScore: PlayerScore) {
         self.playerScore = playerScore
         super.init()
+        physicsWorld.contactDelegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,9 +49,31 @@ class Level: SCNScene {
         }
         
         let bullet = Bullet.build(for: self, at: delegate.playerPosition)
-        print("Player position: \(delegate.playerPosition)")
-        // TODO: Shoot the bullet toward where the user is looking at
         bullet.shoot(toward: delegate.playerOrientation)
+    }
+    
+}
+
+// MARK: - SCNPhysicsContactDelegate
+
+extension Level: SCNPhysicsContactDelegate {
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        // Check which of the two nodes is an enemy
+        let nodeA = contact.nodeA
+        let nodeB = contact.nodeB
+        var enemy: SCNNode?
+        if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
+            enemy = nodeA
+        } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
+            enemy = nodeB
+        }
+        
+        // Load the explosion particle system
+        if let enemy = enemy {
+            SCNParticleSystem.build(for: self, explode: enemy, at: contact.contactPoint)
+            enemy.removeFromParentNode()
+        }
     }
     
 }

@@ -22,7 +22,9 @@ class Bullet: SCNNode {
         super.init()
         geometry = SCNSphere(radius: 0.025)
         geometry!.firstMaterial?.diffuse.contents = UIColor.green
-        physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: self))
+        physicsBody?.categoryBitMask = BitMaskCategory.bullet.rawValue
+        physicsBody?.contactTestBitMask = BitMaskCategory.enemy.rawValue
     }
     
     required init?(coder aDecoder: NSCoder) {

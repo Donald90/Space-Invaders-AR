@@ -43,3 +43,19 @@ extension Bullet {
     }
     
 }
+
+extension SCNParticleSystem {
+    
+    static func build(for scene: SCNScene, explode enemyNode: SCNNode, at contactPoint: SCNVector3) {
+        let explosion = SCNParticleSystem(named: "EnemyExplosion.scnp", inDirectory: "art.scnassets")
+        explosion?.loops = false
+        explosion?.particleLifeSpan = 4
+        explosion?.emitterShape = enemyNode.geometry
+        
+        let explosionNode = SCNNode()
+        explosionNode.addParticleSystem(explosion!)
+        explosionNode.position = contactPoint
+        scene.rootNode.addChildNode(explosionNode)
+    }
+    
+}

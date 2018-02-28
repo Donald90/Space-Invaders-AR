@@ -16,8 +16,10 @@ class Enemy: SCNNode {
         super.init()
         geometry = SCNSphere(radius: 0.1)
         geometry!.firstMaterial?.diffuse.contents = UIColor.red
-        physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: self))
         physicsBody?.isAffectedByGravity = false
+        physicsBody?.categoryBitMask = BitMaskCategory.enemy.rawValue
+        physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue
     }
     
     required init?(coder aDecoder: NSCoder) {

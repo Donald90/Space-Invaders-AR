@@ -23,6 +23,7 @@
 		1393511F2045B6E90080B208 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393511E2045B6E90080B208 /* Enemy.swift */; };
 		139351212045B7950080B208 /* Spawning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139351202045B7950080B208 /* Spawning.swift */; };
 		139351232045BE7C0080B208 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139351222045BE7C0080B208 /* Level.swift */; };
+		13D45F0D204735D80095D335 /* BitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D45F0C204735D80095D335 /* BitMaskCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		1393511E2045B6E90080B208 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		139351202045B7950080B208 /* Spawning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spawning.swift; sourceTree = "<group>"; };
 		139351222045BE7C0080B208 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		13D45F0C204735D80095D335 /* BitMaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				13035A6F204697E20080DB88 /* SCNVector3.swift */,
 				13035A712046A19E0080DB88 /* Random.swift */,
 				13035A792046EDDF0080DB88 /* PlayerScore.swift */,
+				13D45F0C204735D80095D335 /* BitMaskCategory.swift */,
 			);
 			path = "Space Invaders AR";
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				139351212045B7950080B208 /* Spawning.swift in Sources */,
 				13035A7A2046EDDF0080DB88 /* PlayerScore.swift in Sources */,
 				136599D62045D9E100DBA8CA /* matrix_float4x4.swift in Sources */,
+				13D45F0D204735D80095D335 /* BitMaskCategory.swift in Sources */,
 				1393510F2045B5DC0080B208 /* ViewController.swift in Sources */,
 				1393510B2045B5DC0080B208 /* AppDelegate.swift in Sources */,
 				136599D42045D62000DBA8CA /* Bullet.swift in Sources */,
