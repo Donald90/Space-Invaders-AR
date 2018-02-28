@@ -38,9 +38,10 @@ class Bullet: SCNNode {
         physicsBody?.applyForce(toward * Bullet.power, asImpulse: true)
         
         // Remove the bullet from the scene when its lifespan expires
-        Timer.scheduledTimer(withTimeInterval: Bullet.lifespan, repeats: false) { (_) in
-            self.removeFromParentNode()
-        }
+        runAction(SCNAction.sequence([
+            SCNAction.wait(duration: TimeInterval(Bullet.lifespan)),
+            SCNAction.removeFromParentNode()
+            ]))
     }
     
 }
