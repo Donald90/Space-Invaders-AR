@@ -17,16 +17,14 @@ class Level: SCNScene {
     
     // MARK: - Properties
     
-    var delegate: LevelDelegate?
+    static let spawnInterval: TimeInterval = 3
     
-    var enemies = [Enemy]()
+    var delegate: LevelDelegate?
     
     // MARK: - Initializers
     
     override init() {
         super.init()
-        let enemy = Enemy.spawn(for: self)
-        enemies.append(enemy)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,12 +33,19 @@ class Level: SCNScene {
     
     // MARK: - Gameplay
     
+    func run() {
+        Timer.scheduledTimer(withTimeInterval: Level.spawnInterval, repeats: true) { (_) in
+            _ = Enemy.spawn(for: self, whenPlayerIsAt: self.delegate?.playerPosition ?? SCNVector3Zero)
+        }
+    }
+    
     func tap() {
         guard let delegate = delegate else {
             fatalError("Level need to know where the user is to shoot a bullet")
         }
         
         let bullet = Bullet.build(for: self, at: delegate.playerPosition)
+        print("Player position: \(delegate.playerPosition)")
         // TODO: Shoot the bullet toward where the user is looking at
         bullet.shoot(toward: delegate.playerOrientation)
     }

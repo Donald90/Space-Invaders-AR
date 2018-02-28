@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		13035A70204697E20080DB88 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A6F204697E20080DB88 /* SCNVector3.swift */; };
+		13035A722046A19E0080DB88 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A712046A19E0080DB88 /* Random.swift */; };
+		13035A742046B9A50080DB88 /* SCNMatrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A732046B9A50080DB88 /* SCNMatrix4.swift */; };
 		136599D42045D62000DBA8CA /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D32045D62000DBA8CA /* Bullet.swift */; };
 		136599D62045D9E100DBA8CA /* matrix_float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D52045D9E100DBA8CA /* matrix_float4x4.swift */; };
 		1393510B2045B5DC0080B208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393510A2045B5DC0080B208 /* AppDelegate.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		13035A6F204697E20080DB88 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
+		13035A712046A19E0080DB88 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		13035A732046B9A50080DB88 /* SCNMatrix4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMatrix4.swift; sourceTree = "<group>"; };
 		136599D32045D62000DBA8CA /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		136599D52045D9E100DBA8CA /* matrix_float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matrix_float4x4.swift; sourceTree = "<group>"; };
 		139351072045B5DC0080B208 /* Space Invaders AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Invaders AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,17 +74,19 @@
 			children = (
 				1393510A2045B5DC0080B208 /* AppDelegate.swift */,
 				1393510C2045B5DC0080B208 /* art.scnassets */,
-				1393510E2045B5DC0080B208 /* ViewController.swift */,
-				139351102045B5DC0080B208 /* Main.storyboard */,
 				139351132045B5DC0080B208 /* Assets.xcassets */,
+				139351102045B5DC0080B208 /* Main.storyboard */,
 				139351152045B5DC0080B208 /* LaunchScreen.storyboard */,
 				139351182045B5DC0080B208 /* Info.plist */,
-				1393511E2045B6E90080B208 /* Enemy.swift */,
-				139351202045B7950080B208 /* Spawning.swift */,
+				1393510E2045B5DC0080B208 /* ViewController.swift */,
 				139351222045BE7C0080B208 /* Level.swift */,
+				139351202045B7950080B208 /* Spawning.swift */,
+				1393511E2045B6E90080B208 /* Enemy.swift */,
 				136599D32045D62000DBA8CA /* Bullet.swift */,
 				136599D52045D9E100DBA8CA /* matrix_float4x4.swift */,
+				13035A732046B9A50080DB88 /* SCNMatrix4.swift */,
 				13035A6F204697E20080DB88 /* SCNVector3.swift */,
+				13035A712046A19E0080DB88 /* Random.swift */,
 			);
 			path = "Space Invaders AR";
 			sourceTree = "<group>";
@@ -166,6 +172,8 @@
 				13035A70204697E20080DB88 /* SCNVector3.swift in Sources */,
 				139351232045BE7C0080B208 /* Level.swift in Sources */,
 				1393511F2045B6E90080B208 /* Enemy.swift in Sources */,
+				13035A742046B9A50080DB88 /* SCNMatrix4.swift in Sources */,
+				13035A722046A19E0080DB88 /* Random.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

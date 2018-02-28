@@ -70,12 +70,14 @@ class ViewController: UIViewController {
 extension ViewController: LevelDelegate {
     
     var playerPosition: SCNVector3 {
-        guard let transform = sceneView.pointOfView?.transform else {
-            return SCNVector3Zero
-        }
-        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-        return orientation + location
+//        guard let transform = sceneView.pointOfView?.transform else {
+//            return SCNVector3Zero
+//        }
+//        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+//        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+//        return orientation + location
+        guard let transform = sceneView.session.currentFrame?.camera.transform else { return SCNVector3Zero }
+        return transform.position
     }
     
     var playerOrientation: SCNVector3 {
@@ -100,6 +102,7 @@ extension ViewController: ARSessionDelegate {
                 level = Level()
                 level!.delegate = self
                 sceneView.scene = level!
+                level!.run()
             }
         default:
             print("Not ready")

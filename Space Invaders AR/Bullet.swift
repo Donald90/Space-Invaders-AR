@@ -12,7 +12,7 @@ class Bullet: SCNNode {
     
     // MARK: - Properties
     
-    static let power: Float = 50
+    static let power: Float = 25
     
     static let lifespan: TimeInterval = 2.5
     
@@ -20,7 +20,7 @@ class Bullet: SCNNode {
     
     override init() {
         super.init()
-        geometry = SCNSphere(radius: 0.1)
+        geometry = SCNSphere(radius: 0.025)
         geometry!.firstMaterial?.diffuse.contents = UIColor.green
         physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }

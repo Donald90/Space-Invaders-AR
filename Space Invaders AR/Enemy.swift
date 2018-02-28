@@ -16,8 +16,8 @@ class Enemy: SCNNode {
         super.init()
         geometry = SCNSphere(radius: 0.1)
         geometry!.firstMaterial?.diffuse.contents = UIColor.red
-        // TODO: Enemies should not be affected by gravity
         physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        physicsBody?.isAffectedByGravity = false
     }
     
     required init?(coder aDecoder: NSCoder) {
