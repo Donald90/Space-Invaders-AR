@@ -10,6 +10,7 @@ import SceneKit
 
 protocol LevelDelegate {
     var playerPosition: SCNVector3 { get }
+    var playerOrientation: SCNVector3 { get }
 }
 
 class Level: SCNScene {
@@ -35,13 +36,13 @@ class Level: SCNScene {
     // MARK: - Gameplay
     
     func tap() {
-        guard let playerPosition = delegate?.playerPosition else {
+        guard let delegate = delegate else {
             fatalError("Level need to know where the user is to shoot a bullet")
         }
         
-        let bullet = Bullet.build(for: self, at: playerPosition)
+        let bullet = Bullet.build(for: self, at: delegate.playerPosition)
         // TODO: Shoot the bullet toward where the user is looking at
-        bullet.shoot(toward: SCNVector3(0, 0, -1 * 9))
+        bullet.shoot(toward: delegate.playerOrientation)
     }
     
 }

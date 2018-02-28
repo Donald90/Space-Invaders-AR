@@ -70,10 +70,20 @@ class ViewController: UIViewController {
 extension ViewController: LevelDelegate {
     
     var playerPosition: SCNVector3 {
-        guard let cameraPosition = sceneView.session.currentFrame?.camera.transform.position else {
+        guard let transform = sceneView.pointOfView?.transform else {
             return SCNVector3Zero
         }
-        return cameraPosition
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        return orientation + location
+    }
+    
+    var playerOrientation: SCNVector3 {
+        guard let transform = sceneView.pointOfView?.transform else {
+            return SCNVector3Zero
+        }
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        return orientation
     }
     
 }

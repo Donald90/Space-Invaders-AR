@@ -10,11 +10,17 @@ import SceneKit
 
 class Bullet: SCNNode {
     
+    // MARK: - Properties
+    
+    static let power: Float = 50
+    
+    static let lifespan: TimeInterval = 2.5
+    
     // MARK: - Initializers
     
     override init() {
         super.init()
-        geometry = SCNSphere(radius: 0.01)
+        geometry = SCNSphere(radius: 0.1)
         geometry!.firstMaterial?.diffuse.contents = UIColor.green
         physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }
@@ -26,7 +32,13 @@ class Bullet: SCNNode {
     // MARK: - Functions
     
     func shoot(toward: SCNVector3) {
-        physicsBody?.applyForce(toward, asImpulse: true)
+        // Apply an impulse to the bullet
+        physicsBody?.applyForce(toward * Bullet.power, asImpulse: true)
+        
+        // Remove the bullet from the scene when its lifespan expires
+        Timer.scheduledTimer(withTimeInterval: Bullet.lifespan, repeats: false) { (_) in
+            self.removeFromParentNode()
+        }
     }
     
 }
