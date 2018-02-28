@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpriteKit
 import SceneKit
 import ARKit
 
@@ -18,7 +19,11 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
+    var score: PlayerScore?
+    
     var level: Level?
+    
+    var overlay: Overlay?
     
     // MARK: - UIViewController
     
@@ -70,12 +75,12 @@ class ViewController: UIViewController {
 extension ViewController: LevelDelegate {
     
     var playerPosition: SCNVector3 {
-//        guard let transform = sceneView.pointOfView?.transform else {
-//            return SCNVector3Zero
-//        }
-//        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-//        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-//        return orientation + location
+        //        guard let transform = sceneView.pointOfView?.transform else {
+        //            return SCNVector3Zero
+        //        }
+        //        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        //        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        //        return orientation + location
         guard let transform = sceneView.session.currentFrame?.camera.transform else { return SCNVector3Zero }
         return transform.position
     }
@@ -99,9 +104,19 @@ extension ViewController: ARSessionDelegate {
         case .normal:
             print("Ready")
             if level == nil {
-                level = Level()
+                score = PlayerScore()
+                
+                // Set the current level
+                level = Level(playerScore: score!)
                 level!.delegate = self
                 sceneView.scene = level!
+                
+                // Set the overlay HUD
+                overlay = Overlay(size: view.bounds.size)
+                sceneView.overlaySKScene = overlay
+                
+                score!.observers.append(overlay!)
+                
                 level!.run()
             }
         default:

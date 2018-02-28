@@ -21,9 +21,12 @@ class Level: SCNScene {
     
     var delegate: LevelDelegate?
     
+    let playerScore: PlayerScore
+    
     // MARK: - Initializers
     
-    override init() {
+    init(playerScore: PlayerScore) {
+        self.playerScore = playerScore
         super.init()
     }
     
