@@ -13,7 +13,7 @@ extension Enemy {
     // FIXME: Set the spawnDistance to 2 meters
     static let spawnDistance: Float = 2
     
-    static func spawn(for scene: SCNScene, whenPlayerIsAt position: SCNVector3) -> Enemy {
+    static func spawn(in scene: SCNScene, whenPlayerIsAt position: SCNVector3) -> Enemy {
         // TODO: Build different types of enemies with a factory
         let enemy = Enemy()
         
@@ -34,7 +34,7 @@ extension Enemy {
 
 extension Bullet {
     
-    static func build(for scene: SCNScene, at position: SCNVector3) -> Bullet {
+    static func build(in scene: SCNScene, at position: SCNVector3) -> Bullet {
         // TODO: Build different types of bullets with a factory
         let bullet = Bullet()
         bullet.position = position
@@ -46,7 +46,7 @@ extension Bullet {
 
 extension SCNParticleSystem {
     
-    static func build(for scene: SCNScene, explode enemyNode: SCNNode, at contactPoint: SCNVector3) {
+    static func build(in scene: SCNScene, explode enemyNode: SCNNode, at contactPoint: SCNVector3) {
         let explosion = SCNParticleSystem(named: "EnemyExplosion.scnp", inDirectory: "art.scnassets")
         explosion?.loops = false
         explosion?.particleLifeSpan = 4

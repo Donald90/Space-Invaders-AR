@@ -39,7 +39,7 @@ class Level: SCNScene {
     
     func run() {
         Timer.scheduledTimer(withTimeInterval: Level.spawnInterval, repeats: true) { (_) in
-            _ = Enemy.spawn(for: self, whenPlayerIsAt: self.delegate?.playerPosition ?? SCNVector3Zero)
+            _ = Enemy.spawn(in: self, whenPlayerIsAt: self.delegate?.playerPosition ?? SCNVector3Zero)
         }
     }
     
@@ -48,7 +48,7 @@ class Level: SCNScene {
             fatalError("Level need to know where the user is to shoot a bullet")
         }
         
-        let bullet = Bullet.build(for: self, at: delegate.playerPosition)
+        let bullet = Bullet.build(in: self, at: delegate.playerPosition)
         bullet.shoot(toward: delegate.playerOrientation)
     }
     
@@ -63,17 +63,21 @@ extension Level: SCNPhysicsContactDelegate {
         let nodeA = contact.nodeA
         let nodeB = contact.nodeB
         var enemy: SCNNode?
+        var bullet: SCNNode?
         if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
             enemy = nodeA
+            bullet = nodeB
         } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
             enemy = nodeB
+            bullet = nodeA
         }
         
         // Load the explosion particle system
-        if let enemy = enemy {
-            SCNParticleSystem.build(for: self, explode: enemy, at: contact.contactPoint)
-            enemy.removeFromParentNode()
-            playerScore.score += 1
+        if let enemy = enemy as? Enemy, let bullet = bullet as? Bullet {
+            let killed = enemy.hit(by: bullet, in: self, at: contact.contactPoint)
+            if killed {
+                playerScore.score += enemy.score
+            }
         }
     }
     
