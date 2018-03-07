@@ -10,11 +10,13 @@ import Foundation
 
 struct Constants {
     
+    // Expressed as s
     enum Time: TimeInterval {
         case enemySpawnInterval = 3
         case bulletLifeSpan = 2.5
     }
     
+    // Expressed as m
     enum Space: Float {
         case enemySpawnDistance = 2
     }

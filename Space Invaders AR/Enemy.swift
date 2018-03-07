@@ -39,8 +39,10 @@ class Enemy: SCNNode {
         return true
     }
     
-    func update(deltaTime time: TimeInterval) {
-        print("Updating enemy")
+    func follow(player target: SCNVector3, deltaTime: TimeInterval) {
+        debugPrint(deltaTime)
+        let toPlayer = target - position
+        position = position + (toPlayer * Float(deltaTime))
     }
     
 }
