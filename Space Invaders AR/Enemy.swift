@@ -37,17 +37,14 @@ class Enemy: SCNNode {
     
     // MARK: - Gameplay
     
-    func hit(by bullet: Bullet, in scene: SCNScene, at contactPoint: SCNVector3) -> Bool {
+    func hit(by bullet: Bullet, at contactPoint: SCNVector3) -> (SCNNode, Bool) {
+        // Decrease enemy life by damage of the bullet it was hit by
         life -= bullet.damage
-        SCNParticleSystem.build(in: scene, explode: self, at: contactPoint)
         
-        if life <= 0 {
-            removeFromParentNode()
-            return true
-        } else {
-            return false
-        }
+        // Build the explosion
+        let explosionNode = SCNParticleSystem.build(explode: self, at: contactPoint)
         
+        return (explosionNode, life <= 0)
     }
     
     func follow(player target: SCNVector3, deltaTime: TimeInterval) {

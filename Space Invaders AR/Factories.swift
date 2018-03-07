@@ -23,7 +23,6 @@ extension Enemy {
             .rotate(angle: Float.random(min: -.pi, max: .pi), axis: .y)
         enemy.transform = transform
         
-        scene.rootNode.addChildNode(enemy)
         return enemy
     }
     
@@ -35,7 +34,6 @@ extension Bullet {
         // TODO: Build different types of bullets with a factory
         let bullet = Bullet()
         bullet.position = position
-        scene.rootNode.addChildNode(bullet)
         return bullet
     }
     
@@ -43,16 +41,16 @@ extension Bullet {
 
 extension SCNParticleSystem {
     
-    static func build(in scene: SCNScene, explode enemyNode: SCNNode, at contactPoint: SCNVector3) {
+    static func build(explode enemyNode: SCNNode, at contactPoint: SCNVector3) -> SCNNode {
         let explosion = SCNParticleSystem(named: "EnemyExplosion.scnp", inDirectory: "art.scnassets")
         explosion?.loops = false
-        explosion?.particleLifeSpan = 4
+        explosion?.particleLifeSpan = CGFloat(Constants.Time.explosionLifespan.rawValue)
         explosion?.emitterShape = enemyNode.geometry
         
         let explosionNode = SCNNode()
         explosionNode.addParticleSystem(explosion!)
         explosionNode.position = contactPoint
-        scene.rootNode.addChildNode(explosionNode)
+        return explosionNode
     }
     
 }

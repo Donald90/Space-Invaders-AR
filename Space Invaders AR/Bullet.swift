@@ -36,12 +36,6 @@ class Bullet: SCNNode {
     func shoot(toward: SCNVector3) {
         // Apply an impulse to the bullet
         physicsBody?.applyForce(toward * power, asImpulse: true)
-        
-        // Remove the bullet from the scene when its lifespan expires
-        runAction(SCNAction.sequence([
-            SCNAction.wait(duration: TimeInterval(Constants.Time.bulletLifeSpan.rawValue)),
-            SCNAction.removeFromParentNode()
-            ]))
     }
     
 }

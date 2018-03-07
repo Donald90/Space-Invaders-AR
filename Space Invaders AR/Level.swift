@@ -66,7 +66,7 @@ class Level: SCNScene {
             self.lastSpawnTime = time
             
             let enemy = Enemy.spawn(in: self, whenPlayerIsAt: playerPosition)
-            enemies.append(enemy)
+            add(enemy: enemy)
         }
         
         // Let every enemy follow the player
@@ -83,8 +83,18 @@ class Level: SCNScene {
             fatalError("Level need to know where the user is to shoot a bullet")
         }
         
+        // Create a bullet and add it to the scene
         let bullet = Bullet.build(in: self, at: playerDelegate.position)
+        rootNode.addChildNode(bullet)
+        
+        // Shoot the bullet
         bullet.shoot(toward: playerDelegate.orientation)
+        
+        // Remove the bullet from the scene when its lifespan expires
+        bullet.runAction(SCNAction.sequence([
+            SCNAction.wait(duration: TimeInterval(Constants.Time.bulletLifespan.rawValue)),
+            SCNAction.removeFromParentNode()
+            ]))
     }
     
 }
@@ -107,14 +117,37 @@ extension Level: SCNPhysicsContactDelegate {
             bullet = nodeA
         }
         
-        // Load the explosion particle system
         if let enemy = enemy as? Enemy,
             let bullet = bullet as? Bullet {
-            let killed = enemy.hit(by: bullet, in: self, at: contact.contactPoint)
+            
+            let (explosion, killed) = enemy.hit(by: bullet, at: contact.contactPoint)
+            
+            // Add the explosion to the scene and remove the enemy if it is dead
+            rootNode.addChildNode(explosion)
             if killed {
                 playerScore.score += enemy.points
+                
+                remove(enemy: enemy)
             }
         }
+    }
+    
+}
+
+// MARK: - Utils
+
+extension Level {
+    
+    func add(enemy: Enemy) {
+        rootNode.addChildNode(enemy)
+        enemies.append(enemy)
+    }
+    
+    func remove(enemy: Enemy) {
+        if let index = enemies.index(of: enemy) {
+            enemies.remove(at: index)
+        }
+        enemy.removeFromParentNode()
     }
     
 }

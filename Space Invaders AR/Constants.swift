@@ -13,7 +13,8 @@ struct Constants {
     // Expressed as s
     enum Time: TimeInterval {
         case enemySpawnInterval = 3
-        case bulletLifeSpan = 2.5
+        case bulletLifespan = 2.5
+        case explosionLifespan = 2
     }
     
     // Expressed as m
