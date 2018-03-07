@@ -26,4 +26,22 @@ struct Constants {
         case enemy = 0.1
     }
     
+    enum Life: Int {
+        case enemy = 2
+        case player = 3
+    }
+    
+    enum Damage: Int {
+        case enemy = 1
+        case bullet = 2
+    }
+    
+    enum Force: Float {
+        case bulletImpulse = 25
+    }
+    
+    enum Points: Int {
+        case enemy = 1
+    }
+    
 }

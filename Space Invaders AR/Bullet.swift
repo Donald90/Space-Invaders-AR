@@ -12,7 +12,9 @@ class Bullet: SCNNode {
     
     // MARK: - Properties
     
-    static let power: Float = 25
+    let power = Constants.Force.bulletImpulse.rawValue
+    
+    let damage: Int = Constants.Damage.bullet.rawValue
     
     // MARK: - Initializers
     
@@ -33,7 +35,7 @@ class Bullet: SCNNode {
     
     func shoot(toward: SCNVector3) {
         // Apply an impulse to the bullet
-        physicsBody?.applyForce(toward * Bullet.power, asImpulse: true)
+        physicsBody?.applyForce(toward * power, asImpulse: true)
         
         // Remove the bullet from the scene when its lifespan expires
         runAction(SCNAction.sequence([

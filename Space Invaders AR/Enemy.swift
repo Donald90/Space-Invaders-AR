@@ -12,7 +12,12 @@ class Enemy: SCNNode {
     
     // MARK: - Properties
     
-    let score: Int = 1
+    // How much the player get if he kill this enemy
+    let points: Int = Constants.Points.enemy.rawValue
+    
+    var life: Int = Constants.Life.enemy.rawValue
+    
+    let damage: Int = Constants.Damage.enemy.rawValue
     
     // MARK: - Initializers
     
@@ -30,13 +35,19 @@ class Enemy: SCNNode {
         fatalError("Method not implementhed")
     }
     
-    // MARK: - Functions
+    // MARK: - Gameplay
     
     func hit(by bullet: Bullet, in scene: SCNScene, at contactPoint: SCNVector3) -> Bool {
-        // TODO: Check bullet damage and compare to enemy life
+        life -= bullet.damage
         SCNParticleSystem.build(in: scene, explode: self, at: contactPoint)
-        removeFromParentNode()
-        return true
+        
+        if life <= 0 {
+            removeFromParentNode()
+            return true
+        } else {
+            return false
+        }
+        
     }
     
     func follow(player target: SCNVector3, deltaTime: TimeInterval) {

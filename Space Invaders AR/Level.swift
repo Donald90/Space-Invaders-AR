@@ -60,8 +60,8 @@ class Level: SCNScene {
         }
         
         // Spawn an enemy every Constants.Time.enemySpawnInterval
-        let deltaTime = time - lastSpawnTime
-        if deltaTime >= Constants.Time.enemySpawnInterval.rawValue {
+        let deltaSpawnTime = time - lastSpawnTime
+        if deltaSpawnTime >= Constants.Time.enemySpawnInterval.rawValue {
             // Update lastSpawnTime to match this current time
             self.lastSpawnTime = time
             
@@ -112,7 +112,7 @@ extension Level: SCNPhysicsContactDelegate {
             let bullet = bullet as? Bullet {
             let killed = enemy.hit(by: bullet, in: self, at: contact.contactPoint)
             if killed {
-                playerScore.score += enemy.score
+                playerScore.score += enemy.points
             }
         }
     }

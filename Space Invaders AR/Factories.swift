@@ -1,5 +1,5 @@
 //
-//  Spawning.swift
+//  Factories.swift
 //  Space Invaders AR
 //
 //  Created by Francesco Chiusolo on 27/02/2018.

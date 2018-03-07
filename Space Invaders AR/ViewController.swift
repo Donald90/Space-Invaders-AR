@@ -75,12 +75,6 @@ class ViewController: UIViewController {
 extension ViewController: PlayerDelegate {
     
     var position: SCNVector3 {
-        //        guard let transform = sceneView.pointOfView?.transform else {
-        //            return SCNVector3Zero
-        //        }
-        //        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-        //        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        //        return orientation + location
         guard let transform = sceneView.session.currentFrame?.camera.transform else { return SCNVector3Zero }
         return transform.position
     }
@@ -89,8 +83,7 @@ extension ViewController: PlayerDelegate {
         guard let transform = sceneView.pointOfView?.transform else {
             return SCNVector3Zero
         }
-        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-        return orientation
+        return transform.orientation
     }
     
 }
