@@ -14,8 +14,6 @@ class Bullet: SCNNode {
     
     static let power: Float = 25
     
-    static let lifespan: TimeInterval = 2.5
-    
     // MARK: - Initializers
     
     override init() {
@@ -39,7 +37,7 @@ class Bullet: SCNNode {
         
         // Remove the bullet from the scene when its lifespan expires
         runAction(SCNAction.sequence([
-            SCNAction.wait(duration: TimeInterval(Bullet.lifespan)),
+            SCNAction.wait(duration: TimeInterval(Constants.Time.bulletLifeSpan.rawValue)),
             SCNAction.removeFromParentNode()
             ]))
     }

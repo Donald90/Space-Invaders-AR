@@ -72,9 +72,9 @@ class ViewController: UIViewController {
 
 // MARK: - LevelDelegate
 
-extension ViewController: LevelDelegate {
+extension ViewController: PlayerDelegate {
     
-    var playerPosition: SCNVector3 {
+    var position: SCNVector3 {
         //        guard let transform = sceneView.pointOfView?.transform else {
         //            return SCNVector3Zero
         //        }
@@ -85,7 +85,7 @@ extension ViewController: LevelDelegate {
         return transform.position
     }
     
-    var playerOrientation: SCNVector3 {
+    var orientation: SCNVector3 {
         guard let transform = sceneView.pointOfView?.transform else {
             return SCNVector3Zero
         }
@@ -108,7 +108,7 @@ extension ViewController: ARSessionDelegate {
                 
                 // Set the current level
                 level = Level(playerScore: score!)
-                level!.delegate = self
+                level!.playerDelegate = self
                 sceneView.scene = level!
                 
                 // Set the overlay HUD
@@ -116,8 +116,6 @@ extension ViewController: ARSessionDelegate {
                 sceneView.overlaySKScene = overlay
                 
                 score!.observers.append(overlay!)
-                
-                level!.run()
             }
         default:
             print("Not ready")
@@ -128,4 +126,10 @@ extension ViewController: ARSessionDelegate {
 
 // MARK: - ARSCNViewDelegate
 
-extension ViewController: ARSCNViewDelegate {}
+extension ViewController: ARSCNViewDelegate {
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        level?.update(updateAtTime: time)
+    }
+    
+}

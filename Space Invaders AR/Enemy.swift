@@ -9,7 +9,7 @@
 import SceneKit
 
 class Enemy: SCNNode {
-
+    
     // MARK: - Properties
     
     let score: Int = 1
@@ -37,6 +37,10 @@ class Enemy: SCNNode {
         SCNParticleSystem.build(in: scene, explode: self, at: contactPoint)
         removeFromParentNode()
         return true
+    }
+    
+    func update(deltaTime time: TimeInterval) {
+        print("Updating enemy")
     }
     
 }

@@ -10,9 +10,6 @@ import SceneKit
 
 extension Enemy {
     
-    // FIXME: Set the spawnDistance to 2 meters
-    static let spawnDistance: Float = 2
-    
     static func spawn(in scene: SCNScene, whenPlayerIsAt position: SCNVector3) -> Enemy {
         // TODO: Build different types of enemies with a factory
         let enemy = Enemy()
@@ -21,7 +18,7 @@ extension Enemy {
             // Move to player position
             .translate(tx: position.x, ty: position.y, tz: position.z)
             // Move forward of spawnDistance amount
-            .translate(tx: 0, ty: 0, tz: spawnDistance)
+            .translate(tx: 0, ty: 0, tz: Constants.Space.enemySpawnDistance.rawValue)
             // Rotate over y axis of a random angle so it stays on the horizon
             .rotate(angle: Float.random(min: -.pi, max: .pi), axis: .y)
         enemy.transform = transform

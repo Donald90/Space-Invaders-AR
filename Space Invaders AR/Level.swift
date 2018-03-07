@@ -8,20 +8,22 @@
 
 import SceneKit
 
-protocol LevelDelegate {
-    var playerPosition: SCNVector3 { get }
-    var playerOrientation: SCNVector3 { get }
+protocol PlayerDelegate {
+    var position: SCNVector3 { get }
+    var orientation: SCNVector3 { get }
 }
 
 class Level: SCNScene {
     
     // MARK: - Properties
     
-    static let spawnInterval: TimeInterval = 3
+    var lastSpawnTime: TimeInterval?
     
-    var delegate: LevelDelegate?
+    var playerDelegate: PlayerDelegate?
     
     let playerScore: PlayerScore
+    
+    var enemies: [Enemy] = []
     
     // MARK: - Initializers
     
@@ -37,19 +39,33 @@ class Level: SCNScene {
     
     // MARK: - Gameplay
     
-    func run() {
-        Timer.scheduledTimer(withTimeInterval: Level.spawnInterval, repeats: true) { (_) in
-            _ = Enemy.spawn(in: self, whenPlayerIsAt: self.delegate?.playerPosition ?? SCNVector3Zero)
+    func update(updateAtTime time: TimeInterval) {
+        guard let lastSpawnTime = self.lastSpawnTime else {
+            // At the first update, lastSpawnTime is nil; init it with time.
+            self.lastSpawnTime = time
+            return
+        }
+        
+        let deltaTime = time - lastSpawnTime
+        if deltaTime >= Constants.Time.enemySpawnInterval.rawValue {
+            self.lastSpawnTime = time
+            
+            let enemy = Enemy.spawn(in: self, whenPlayerIsAt: self.playerDelegate?.position ?? SCNVector3Zero)
+            enemies.append(enemy)
+        }
+        
+        for enemy in enemies {
+            enemy.update(deltaTime: deltaTime)
         }
     }
     
     func tap() {
-        guard let delegate = delegate else {
+        guard let playerDelegate = playerDelegate else {
             fatalError("Level need to know where the user is to shoot a bullet")
         }
         
-        let bullet = Bullet.build(in: self, at: delegate.playerPosition)
-        bullet.shoot(toward: delegate.playerOrientation)
+        let bullet = Bullet.build(in: self, at: playerDelegate.position)
+        bullet.shoot(toward: playerDelegate.orientation)
     }
     
 }
