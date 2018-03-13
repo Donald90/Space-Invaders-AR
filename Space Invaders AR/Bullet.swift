@@ -28,7 +28,7 @@ class Bullet: SCNNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Method not implementhed")
+        fatalError("Method init?(coder:) not implemented")
     }
     
     // MARK: - Functions

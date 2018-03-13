@@ -11,4 +11,5 @@ import Foundation
 enum BitMaskCategory: Int {
     case enemy = 0
     case bullet = 1
+    case player = 2
 }

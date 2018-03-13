@@ -24,18 +24,23 @@ class Level: SCNScene {
     var lastUpdateTime: TimeInterval?
     
     // Player delegate from which get informations about player
-    var playerDelegate: PlayerDelegate?
+    let playerDelegate: PlayerDelegate
     
     let playerScore: PlayerScore
     
     var enemies: [Enemy] = []
     
+    var player = Player()
+    
     // MARK: - Initializers
     
-    init(playerScore: PlayerScore) {
+    init(playerScore: PlayerScore, playerDelegate: PlayerDelegate) {
         self.playerScore = playerScore
+        self.playerDelegate = playerDelegate
         super.init()
         physicsWorld.contactDelegate = self
+        
+        rootNode.addChildNode(player)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,10 +59,8 @@ class Level: SCNScene {
                 return
         }
         
-        // If playerDelegate is undefined, skip every update.
-        guard let playerPosition = playerDelegate?.position else {
-            return
-        }
+        // Retrieve player position
+        let playerPosition = playerDelegate.position
         
         // Spawn an enemy every Constants.Time.enemySpawnInterval
         let deltaSpawnTime = time - lastSpawnTime
@@ -78,11 +81,11 @@ class Level: SCNScene {
         self.lastUpdateTime = time
     }
     
+    func update(player position: SCNVector3) {
+        player.position = position
+    }
+    
     func tap() {
-        guard let playerDelegate = playerDelegate else {
-            fatalError("Level need to know where the user is to shoot a bullet")
-        }
-        
         // Create a bullet and add it to the scene
         let bullet = Bullet.build(in: self, at: playerDelegate.position)
         rootNode.addChildNode(bullet)

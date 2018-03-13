@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         
         // Set the view's delegate
         sceneView.delegate = self
+        sceneView.session.delegate = self
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
@@ -100,8 +101,7 @@ extension ViewController: ARSessionDelegate {
                 score = PlayerScore()
                 
                 // Set the current level
-                level = Level(playerScore: score!)
-                level!.playerDelegate = self
+                level = Level(playerScore: score!, playerDelegate: self)
                 sceneView.scene = level!
                 
                 // Set the overlay HUD
@@ -115,6 +115,13 @@ extension ViewController: ARSessionDelegate {
         }
     }
     
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard let level = level else { return }
+        
+        let cameraPosition = frame.camera.transform.position
+        level.update(player: cameraPosition)
+    }
+    
 }
 
 // MARK: - ARSCNViewDelegate
@@ -122,7 +129,9 @@ extension ViewController: ARSessionDelegate {
 extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        level?.update(updateAtTime: time)
+        guard let level = level else { return }
+        
+        level.update(updateAtTime: time)
     }
     
 }

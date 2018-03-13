@@ -32,7 +32,7 @@ class Enemy: SCNNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Method not implementhed")
+        fatalError("Method init?(coder:) not implemented")
     }
     
     // MARK: - Gameplay
@@ -48,7 +48,6 @@ class Enemy: SCNNode {
     }
     
     func follow(player target: SCNVector3, deltaTime: TimeInterval) {
-        debugPrint(deltaTime)
         let toPlayer = target - position
         position = position + (toPlayer * Float(deltaTime))
     }
