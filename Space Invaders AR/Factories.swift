@@ -10,7 +10,7 @@ import SceneKit
 
 extension Enemy {
     
-    static func spawn(in scene: SCNScene, whenPlayerIsAt position: SCNVector3) -> Enemy {
+    static func spawn(whenPlayerIsAt position: SCNVector3) -> Enemy {
         // TODO: Build different types of enemies with a factory
         let enemy = Enemy()
         
@@ -30,7 +30,7 @@ extension Enemy {
 
 extension Bullet {
     
-    static func build(in scene: SCNScene, at position: SCNVector3) -> Bullet {
+    static func build(at position: SCNVector3) -> Bullet {
         // TODO: Build different types of bullets with a factory
         let bullet = Bullet()
         bullet.position = position

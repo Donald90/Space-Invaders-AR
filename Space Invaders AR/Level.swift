@@ -68,7 +68,7 @@ class Level: SCNScene {
             // Update lastSpawnTime to match this current time
             self.lastSpawnTime = time
             
-            let enemy = Enemy.spawn(in: self, whenPlayerIsAt: playerPosition)
+            let enemy = Enemy.spawn(whenPlayerIsAt: playerPosition)
             add(enemy: enemy)
         }
         
@@ -87,7 +87,7 @@ class Level: SCNScene {
     
     func tap() {
         // Create a bullet and add it to the scene
-        let bullet = Bullet.build(in: self, at: playerDelegate.position)
+        let bullet = Bullet.build(at: playerDelegate.position)
         rootNode.addChildNode(bullet)
         
         // Shoot the bullet
