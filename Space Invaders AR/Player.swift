@@ -12,7 +12,7 @@ class Player: SCNNode {
     
     // MARK: - Properties
     
-    
+    var life: Int = Constants.Life.player.rawValue
     
     // MARK: - Initializers
     
@@ -34,8 +34,9 @@ class Player: SCNNode {
     
     // MARK: - Gameplay
     
-    func hit(by bullet: Bullet, at contactPoint: SCNVector3) {
-        print("Player hit")
+    func hit(by enemy: Enemy, at contactPoint: SCNVector3) -> Bool {
+        life -= enemy.damage
+        return life <= 0
     }
     
 }

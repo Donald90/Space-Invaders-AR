@@ -9,7 +9,7 @@
 import Foundation
 
 enum BitMaskCategory: Int {
-    case enemy = 0
-    case bullet = 1
-    case player = 2
+    case enemy = 1
+    case bullet = 2
+    case player = 4
 }

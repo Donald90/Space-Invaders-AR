@@ -110,29 +110,70 @@ extension Level: SCNPhysicsContactDelegate {
         // Check which of the two nodes is an enemy and which a bullet
         let nodeA = contact.nodeA
         let nodeB = contact.nodeB
-        var enemy: SCNNode?
-        var bullet: SCNNode?
-        if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
-            enemy = nodeA
-            bullet = nodeB
-        } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
-            enemy = nodeB
-            bullet = nodeA
-        }
         
-        if let enemy = enemy as? Enemy,
-            let bullet = bullet as? Bullet {
-            
-            let (explosion, killed) = enemy.hit(by: bullet, at: contact.contactPoint)
-            
-            // Add the explosion to the scene and remove the enemy if it is dead
-            rootNode.addChildNode(explosion)
-            if killed {
-                playerScore.score += enemy.points
-                
-                remove(enemy: enemy)
+        if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.enemy.rawValue {
+            // Case 1: nodeA is an Enemy
+            if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.bullet.rawValue {
+                handle(contact: contact, between: castToEnemy(theNode: nodeA), and: castToBullet(theNode: nodeB))
+            } else if nodeB.physicsBody?.categoryBitMask == BitMaskCategory.player.rawValue {
+                handle(contact: contact, between: castToEnemy(theNode: nodeA), and: castToPlayer(theNode: nodeB))
             }
+        } else if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.bullet.rawValue {
+            // Case 2: nodeA is a Bullet...he can collide only with Enemy
+            handle(contact: contact, between: castToEnemy(theNode: nodeB), and: castToBullet(theNode: nodeA))
+        } else if nodeA.physicsBody?.categoryBitMask == BitMaskCategory.player.rawValue {
+            // Case 2: nodeA is a Player...he can collide only with Enemy
+            handle(contact: contact, between: castToEnemy(theNode: nodeB), and: castToPlayer(theNode: nodeA))
         }
+    }
+    
+    private func handle(contact: SCNPhysicsContact, between enemy: Enemy, and bullet: Bullet) {
+        print("Collision between Enemy and Bullet")
+        
+        let (explosion, killed) = enemy.hit(by: bullet, at: contact.contactPoint)
+        
+        // Add the explosion to the scene and remove the enemy if it is dead
+        rootNode.addChildNode(explosion)
+        if killed {
+            playerScore.score += enemy.points
+            
+            remove(enemy: enemy)
+        }
+    }
+    
+    private func handle(contact: SCNPhysicsContact, between enemy: Enemy, and player: Player) {
+        print("Collision between Enemy and Player")
+        
+        // Remove the player if it is dead
+        let killed = player.hit(by: enemy, at: contact.contactPoint)
+        if killed {
+            playerScore.score = 0
+            player.removeFromParentNode()
+            // TODO: Game Over
+        }
+    }
+    
+    // MARK: Cast Utils
+    
+    private func castToEnemy(theNode: SCNNode) -> Enemy {
+        guard let enemy = theNode as? Enemy else {
+            fatalError("You have assigned the category bitmask of an Enemy to a non Enemy")
+        }
+        return enemy
+    }
+    
+    private func castToBullet(theNode: SCNNode) -> Bullet {
+        guard let bullet = theNode as? Bullet else {
+            fatalError("You have assigned the category bitmask of a Bullet to a non Bullet")
+        }
+        return bullet
+    }
+    
+    private func castToPlayer(theNode: SCNNode) -> Player {
+        guard let player = theNode as? Player else {
+            fatalError("You have assigned the category bitmask of an Player to a non Player")
+        }
+        return player
     }
     
 }

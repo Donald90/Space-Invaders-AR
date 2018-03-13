@@ -28,7 +28,7 @@ class Enemy: SCNNode {
         physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(node: self))
         physicsBody?.isAffectedByGravity = false
         physicsBody?.categoryBitMask = BitMaskCategory.enemy.rawValue
-        physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue
+        physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue & BitMaskCategory.player.rawValue
     }
     
     required init?(coder aDecoder: NSCoder) {
