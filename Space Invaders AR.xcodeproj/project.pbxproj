@@ -14,6 +14,8 @@
 		13035A7A2046EDDF0080DB88 /* PlayerScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A792046EDDF0080DB88 /* PlayerScore.swift */; };
 		133DEC1020502E9D00964ADC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DEC0F20502E9D00964ADC /* Constants.swift */; };
 		133DEC1220505E0A00964ADC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DEC1120505E0A00964ADC /* Player.swift */; };
+		1352AD09205AFFE000EC2918 /* SIVector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352AD08205AFFE000EC2918 /* SIVector2.swift */; };
+		1352AD0B205B021600EC2918 /* Radar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352AD0A205B021600EC2918 /* Radar.swift */; };
 		136599D42045D62000DBA8CA /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D32045D62000DBA8CA /* Bullet.swift */; };
 		136599D62045D9E100DBA8CA /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D52045D9E100DBA8CA /* Transform.swift */; };
 		1393510B2045B5DC0080B208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393510A2045B5DC0080B208 /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 		13035A792046EDDF0080DB88 /* PlayerScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScore.swift; sourceTree = "<group>"; };
 		133DEC0F20502E9D00964ADC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		133DEC1120505E0A00964ADC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1352AD08205AFFE000EC2918 /* SIVector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIVector2.swift; sourceTree = "<group>"; };
+		1352AD0A205B021600EC2918 /* Radar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radar.swift; sourceTree = "<group>"; };
 		136599D32045D62000DBA8CA /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		136599D52045D9E100DBA8CA /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		139351072045B5DC0080B208 /* Space Invaders AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Invaders AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,10 +102,12 @@
 				136599D52045D9E100DBA8CA /* Transform.swift */,
 				13035A732046B9A50080DB88 /* SCNMatrix4.swift */,
 				13035A6F204697E20080DB88 /* SCNVector3.swift */,
+				1352AD08205AFFE000EC2918 /* SIVector2.swift */,
 				13035A712046A19E0080DB88 /* Random.swift */,
 				13035A792046EDDF0080DB88 /* PlayerScore.swift */,
 				13D45F0C204735D80095D335 /* BitMaskCategory.swift */,
 				133DEC0F20502E9D00964ADC /* Constants.swift */,
+				1352AD0A205B021600EC2918 /* Radar.swift */,
 			);
 			path = "Space Invaders AR";
 			sourceTree = "<group>";
@@ -180,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				139351212045B7950080B208 /* Factories.swift in Sources */,
+				1352AD0B205B021600EC2918 /* Radar.swift in Sources */,
 				13035A7A2046EDDF0080DB88 /* PlayerScore.swift in Sources */,
 				136599D62045D9E100DBA8CA /* Transform.swift in Sources */,
 				13D45F0D204735D80095D335 /* BitMaskCategory.swift in Sources */,
@@ -190,6 +197,7 @@
 				139351232045BE7C0080B208 /* Level.swift in Sources */,
 				13035A762046E9140080DB88 /* Overlay.swift in Sources */,
 				1393511F2045B6E90080B208 /* Enemy.swift in Sources */,
+				1352AD09205AFFE000EC2918 /* SIVector2.swift in Sources */,
 				133DEC1020502E9D00964ADC /* Constants.swift in Sources */,
 				13035A742046B9A50080DB88 /* SCNMatrix4.swift in Sources */,
 				133DEC1220505E0A00964ADC /* Player.swift in Sources */,

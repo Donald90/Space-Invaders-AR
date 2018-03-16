@@ -32,6 +32,8 @@ class Level: SCNScene {
     
     var player = Player()
     
+    let radar = Radar()
+    
     // MARK: - Initializers
     
     init(playerScore: PlayerScore, playerDelegate: PlayerDelegate) {
@@ -72,9 +74,17 @@ class Level: SCNScene {
             add(enemy: enemy)
         }
         
+        let deltaTime = time - lastUpdateTime
+        
         // Let every enemy follow the player
         for enemy in enemies {
-            enemy.follow(player: playerPosition, deltaTime: time - lastUpdateTime)
+            enemy.follow(player: playerPosition, deltaTime: deltaTime)
+        }
+        
+        // Update the radar
+        if enemies.count > 0 {
+            let direction = radar.update(deltaTime: deltaTime, player: player.position, target: enemies[0].position)
+            debugPrint(direction)
         }
         
         // Update lastUpdateTime to match this current time
