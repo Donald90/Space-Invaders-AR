@@ -12,8 +12,6 @@ class Overlay: SKScene {
     
     // MARK: - Properties
     
-    static let scorePrefix = "⚽️"
-    
     var scoreNode: SKLabelNode!
     
     // MARK: - Initializers
@@ -26,22 +24,26 @@ class Overlay: SKScene {
         super.init(size: size)
         
         // TODO: Set up the HUD
-        scoreNode = SKLabelNode(text: Overlay.scorePrefix)
+        scoreNode = SKLabelNode(text: "")
         scoreNode.fontColor = UIColor.black
         scoreNode.fontSize = 24
         scoreNode.position = CGPoint(x: size.width / 2, y: 24 + 8)
         
-        addChild(self.scoreNode)
+        addChild(scoreNode)
     }
     
 }
 
 // MARK: - PlayerScoreObserver
 
-extension Overlay: PlayerScoreObserver {
+extension Overlay: ScoreObserver {
+    
+    var id: Int {
+        return Constants.ID.overlay.rawValue
+    }
     
     func update(_ score: Int) {
-        scoreNode.text = Overlay.scorePrefix + " \(score)"
+        scoreNode.text = String(score)
     }
     
 }

@@ -26,7 +26,7 @@ class Level: SCNScene {
     // Player delegate from which get informations about player
     let playerDelegate: PlayerDelegate
     
-    let playerScore: PlayerScore
+    let playerScore: Score
     
     var enemies: [Enemy] = []
     
@@ -36,7 +36,7 @@ class Level: SCNScene {
     
     // MARK: - Initializers
     
-    init(playerScore: PlayerScore, playerDelegate: PlayerDelegate) {
+    init(playerScore: Score, playerDelegate: PlayerDelegate) {
         self.playerScore = playerScore
         self.playerDelegate = playerDelegate
         super.init()

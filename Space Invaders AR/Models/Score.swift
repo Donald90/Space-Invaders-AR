@@ -1,5 +1,5 @@
 //
-//  PlayerScore.swift
+//  Score.swift
 //  Space Invaders AR
 //
 //  Created by Francesco Chiusolo on 28/02/2018.
@@ -10,15 +10,16 @@ import Foundation
 
 // MARK: - Types
 
-protocol PlayerScoreObserver {
+protocol ScoreObserver {
+    var id: Int { get }
     func update(_ score: Int)
 }
 
-class PlayerScore {
+class Score {
     
     // MARK: - Properties
     
-    var observers: [PlayerScoreObserver]
+    private var observers: [ScoreObserver] = []
     
     var score: Int {
         didSet {
@@ -33,6 +34,18 @@ class PlayerScore {
     init() {
         observers = []
         score = 0
+    }
+    
+    // MARK: - Functions
+    
+    func attach(observer: ScoreObserver) {
+        observers.append(observer)
+    }
+    
+    func detach(observer: ScoreObserver) {
+        if let index = observers.index(where: { $0.id == observer.id }) {
+            observers.remove(at: index)
+        }
     }
     
 }

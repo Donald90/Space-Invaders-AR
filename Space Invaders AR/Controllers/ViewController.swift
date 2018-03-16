@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    var score: PlayerScore?
+    var score: Score?
     
     var level: Level?
     
@@ -98,7 +98,7 @@ extension ViewController: ARSessionDelegate {
         case .normal:
             print("Ready")
             if level == nil {
-                score = PlayerScore()
+                score = Score()
                 
                 // Set the current level
                 level = Level(playerScore: score!, playerDelegate: self)
@@ -108,7 +108,7 @@ extension ViewController: ARSessionDelegate {
                 overlay = Overlay(size: view.bounds.size)
                 sceneView.overlaySKScene = overlay
                 
-                score!.observers.append(overlay!)
+                score!.attach(observer: overlay!)
             }
         default:
             print("Not ready")

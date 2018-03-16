@@ -45,4 +45,8 @@ struct Constants {
         case enemy = 1
     }
     
+    enum ID: Int {
+        case overlay
+    }
+    
 }

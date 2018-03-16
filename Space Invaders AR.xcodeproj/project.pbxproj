@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		13035A70204697E20080DB88 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A6F204697E20080DB88 /* SCNVector3.swift */; };
-		13035A722046A19E0080DB88 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A712046A19E0080DB88 /* Random.swift */; };
+		13035A722046A19E0080DB88 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A712046A19E0080DB88 /* Float.swift */; };
 		13035A742046B9A50080DB88 /* SCNMatrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A732046B9A50080DB88 /* SCNMatrix4.swift */; };
 		13035A762046E9140080DB88 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A752046E9140080DB88 /* Overlay.swift */; };
-		13035A7A2046EDDF0080DB88 /* PlayerScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A792046EDDF0080DB88 /* PlayerScore.swift */; };
+		13035A7A2046EDDF0080DB88 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13035A792046EDDF0080DB88 /* Score.swift */; };
 		133DEC1020502E9D00964ADC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DEC0F20502E9D00964ADC /* Constants.swift */; };
 		133DEC1220505E0A00964ADC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DEC1120505E0A00964ADC /* Player.swift */; };
 		1352AD09205AFFE000EC2918 /* SIVector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352AD08205AFFE000EC2918 /* SIVector2.swift */; };
 		1352AD0B205B021600EC2918 /* Radar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352AD0A205B021600EC2918 /* Radar.swift */; };
 		136599D42045D62000DBA8CA /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D32045D62000DBA8CA /* Bullet.swift */; };
-		136599D62045D9E100DBA8CA /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D52045D9E100DBA8CA /* Transform.swift */; };
+		136599D62045D9E100DBA8CA /* matrix_float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136599D52045D9E100DBA8CA /* matrix_float4x4.swift */; };
 		1393510B2045B5DC0080B208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393510A2045B5DC0080B208 /* AppDelegate.swift */; };
 		1393510D2045B5DC0080B208 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1393510C2045B5DC0080B208 /* art.scnassets */; };
 		1393510F2045B5DC0080B208 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393510E2045B5DC0080B208 /* ViewController.swift */; };
@@ -32,16 +32,16 @@
 
 /* Begin PBXFileReference section */
 		13035A6F204697E20080DB88 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
-		13035A712046A19E0080DB88 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		13035A712046A19E0080DB88 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		13035A732046B9A50080DB88 /* SCNMatrix4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMatrix4.swift; sourceTree = "<group>"; };
 		13035A752046E9140080DB88 /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
-		13035A792046EDDF0080DB88 /* PlayerScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScore.swift; sourceTree = "<group>"; };
+		13035A792046EDDF0080DB88 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		133DEC0F20502E9D00964ADC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		133DEC1120505E0A00964ADC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1352AD08205AFFE000EC2918 /* SIVector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIVector2.swift; sourceTree = "<group>"; };
 		1352AD0A205B021600EC2918 /* Radar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radar.swift; sourceTree = "<group>"; };
 		136599D32045D62000DBA8CA /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
-		136599D52045D9E100DBA8CA /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		136599D52045D9E100DBA8CA /* matrix_float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matrix_float4x4.swift; sourceTree = "<group>"; };
 		139351072045B5DC0080B208 /* Space Invaders AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Invaders AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1393510A2045B5DC0080B208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1393510C2045B5DC0080B208 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -67,6 +67,114 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		132B4673205C44F700D49371 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				132B467F205C46F500D49371 /* Sounds */,
+				132B467E205C46ED00D49371 /* Fonts */,
+				139351132045B5DC0080B208 /* Assets.xcassets */,
+				1393510C2045B5DC0080B208 /* art.scnassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		132B4674205C452000D49371 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1393510E2045B5DC0080B208 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		132B4675205C452F00D49371 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				139351152045B5DC0080B208 /* LaunchScreen.storyboard */,
+				139351102045B5DC0080B208 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		132B4676205C454D00D49371 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				139351182045B5DC0080B208 /* Info.plist */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		132B4677205C458000D49371 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1393510A2045B5DC0080B208 /* AppDelegate.swift */,
+				1352AD08205AFFE000EC2918 /* SIVector2.swift */,
+				13D45F0C204735D80095D335 /* BitMaskCategory.swift */,
+				133DEC0F20502E9D00964ADC /* Constants.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		132B4678205C459400D49371 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				133DEC1120505E0A00964ADC /* Player.swift */,
+				1393511E2045B6E90080B208 /* Enemy.swift */,
+				136599D32045D62000DBA8CA /* Bullet.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		132B4679205C45A700D49371 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				139351202045B7950080B208 /* Factories.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		132B467A205C45BA00D49371 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				13035A712046A19E0080DB88 /* Float.swift */,
+				136599D52045D9E100DBA8CA /* matrix_float4x4.swift */,
+				13035A732046B9A50080DB88 /* SCNMatrix4.swift */,
+				13035A6F204697E20080DB88 /* SCNVector3.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		132B467B205C460B00D49371 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				1352AD0A205B021600EC2918 /* Radar.swift */,
+				139351222045BE7C0080B208 /* Level.swift */,
+				13035A752046E9140080DB88 /* Overlay.swift */,
+			);
+			path = Gameplay;
+			sourceTree = "<group>";
+		};
+		132B467C205C465A00D49371 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				13035A792046EDDF0080DB88 /* Score.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		132B467E205C46ED00D49371 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		132B467F205C46F500D49371 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		139350FE2045B5DC0080B208 = {
 			isa = PBXGroup;
 			children = (
@@ -86,28 +194,16 @@
 		139351092045B5DC0080B208 /* Space Invaders AR */ = {
 			isa = PBXGroup;
 			children = (
-				1393510A2045B5DC0080B208 /* AppDelegate.swift */,
-				1393510C2045B5DC0080B208 /* art.scnassets */,
-				139351132045B5DC0080B208 /* Assets.xcassets */,
-				139351102045B5DC0080B208 /* Main.storyboard */,
-				139351152045B5DC0080B208 /* LaunchScreen.storyboard */,
-				139351182045B5DC0080B208 /* Info.plist */,
-				1393510E2045B5DC0080B208 /* ViewController.swift */,
-				139351222045BE7C0080B208 /* Level.swift */,
-				13035A752046E9140080DB88 /* Overlay.swift */,
-				139351202045B7950080B208 /* Factories.swift */,
-				133DEC1120505E0A00964ADC /* Player.swift */,
-				1393511E2045B6E90080B208 /* Enemy.swift */,
-				136599D32045D62000DBA8CA /* Bullet.swift */,
-				136599D52045D9E100DBA8CA /* Transform.swift */,
-				13035A732046B9A50080DB88 /* SCNMatrix4.swift */,
-				13035A6F204697E20080DB88 /* SCNVector3.swift */,
-				1352AD08205AFFE000EC2918 /* SIVector2.swift */,
-				13035A712046A19E0080DB88 /* Random.swift */,
-				13035A792046EDDF0080DB88 /* PlayerScore.swift */,
-				13D45F0C204735D80095D335 /* BitMaskCategory.swift */,
-				133DEC0F20502E9D00964ADC /* Constants.swift */,
-				1352AD0A205B021600EC2918 /* Radar.swift */,
+				132B4676205C454D00D49371 /* Configs */,
+				132B4674205C452000D49371 /* Controllers */,
+				132B4678205C459400D49371 /* Entities */,
+				132B467A205C45BA00D49371 /* Extensions */,
+				132B4679205C45A700D49371 /* Factories */,
+				132B467B205C460B00D49371 /* Gameplay */,
+				132B467C205C465A00D49371 /* Models */,
+				132B4673205C44F700D49371 /* Resources */,
+				132B4675205C452F00D49371 /* Storyboards */,
+				132B4677205C458000D49371 /* Supporting Files */,
 			);
 			path = "Space Invaders AR";
 			sourceTree = "<group>";
@@ -187,8 +283,8 @@
 			files = (
 				139351212045B7950080B208 /* Factories.swift in Sources */,
 				1352AD0B205B021600EC2918 /* Radar.swift in Sources */,
-				13035A7A2046EDDF0080DB88 /* PlayerScore.swift in Sources */,
-				136599D62045D9E100DBA8CA /* Transform.swift in Sources */,
+				13035A7A2046EDDF0080DB88 /* Score.swift in Sources */,
+				136599D62045D9E100DBA8CA /* matrix_float4x4.swift in Sources */,
 				13D45F0D204735D80095D335 /* BitMaskCategory.swift in Sources */,
 				1393510F2045B5DC0080B208 /* ViewController.swift in Sources */,
 				1393510B2045B5DC0080B208 /* AppDelegate.swift in Sources */,
@@ -201,7 +297,7 @@
 				133DEC1020502E9D00964ADC /* Constants.swift in Sources */,
 				13035A742046B9A50080DB88 /* SCNMatrix4.swift in Sources */,
 				133DEC1220505E0A00964ADC /* Player.swift in Sources */,
-				13035A722046A19E0080DB88 /* Random.swift in Sources */,
+				13035A722046A19E0080DB88 /* Float.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4MPX898GZF;
-				INFOPLIST_FILE = "Space Invaders AR/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Space Invaders AR/Configs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.francescochiusolo.Space-Invaders-AR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -355,7 +451,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4MPX898GZF;
-				INFOPLIST_FILE = "Space Invaders AR/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Space Invaders AR/Configs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.francescochiusolo.Space-Invaders-AR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
