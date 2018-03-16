@@ -1,28 +1,38 @@
 //
-//  Score.swift
+//  Direction.swift
 //  Space Invaders AR
 //
-//  Created by Francesco Chiusolo on 28/02/2018.
+//  Created by Francesco Chiusolo on 16/03/2018.
 //  Copyright © 2018 Francesco Chiusolo. All rights reserved.
 //
 
 import Foundation
 
-protocol ScoreObserver {
-    var id: Int { get }
-    func update(_ score: Int)
+// MARK: - Types
+
+enum DirectionValue {
+    case front, right, behind, left, unknown
 }
 
-class Score {
+// MARK: - Protocols
+
+protocol DirectionObserver {
+    var id: Int { get }
+    func update(_ value: DirectionValue)
+}
+
+// MARK: - Class
+
+class Direction {
     
     // MARK: - Properties
     
-    private var observers: [ScoreObserver] = []
+    private var observers: [DirectionObserver] = []
     
-    var score: Int {
+    var value: DirectionValue {
         didSet {
             for observer in observers {
-                observer.update(score)
+                observer.update(value)
             }
         }
     }
@@ -31,19 +41,20 @@ class Score {
     
     init() {
         observers = []
-        score = 0
+        value = .unknown
     }
     
     // MARK: - Functions
     
-    func attach(observer: ScoreObserver) {
+    func attach(observer: DirectionObserver) {
         observers.append(observer)
     }
     
-    func detach(observer: ScoreObserver) {
+    func detach(observer: DirectionObserver) {
         if let index = observers.index(where: { $0.id == observer.id }) {
             observers.remove(at: index)
         }
     }
     
 }
+

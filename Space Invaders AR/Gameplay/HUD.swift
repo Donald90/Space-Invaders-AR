@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Overlay: SKScene {
+class HUD: SKScene {
     
     // MARK: - Properties
     
@@ -32,11 +32,16 @@ class Overlay: SKScene {
         addChild(scoreNode)
     }
     
+    convenience init(size: CGSize, score: Score) {
+        self.init(size: size)
+        score.attach(observer: self)
+    }
+    
 }
 
 // MARK: - PlayerScoreObserver
 
-extension Overlay: ScoreObserver {
+extension HUD: ScoreObserver {
     
     var id: Int {
         return Constants.ID.overlay.rawValue

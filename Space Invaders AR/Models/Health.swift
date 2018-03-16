@@ -1,28 +1,28 @@
 //
-//  Score.swift
+//  Health.swift
 //  Space Invaders AR
 //
-//  Created by Francesco Chiusolo on 28/02/2018.
+//  Created by Francesco Chiusolo on 16/03/2018.
 //  Copyright © 2018 Francesco Chiusolo. All rights reserved.
 //
 
 import Foundation
 
-protocol ScoreObserver {
+protocol HealthObserver {
     var id: Int { get }
-    func update(_ score: Int)
+    func update(_ health: Int)
 }
 
-class Score {
+class Health {
     
     // MARK: - Properties
     
-    private var observers: [ScoreObserver] = []
+    private var observers: [HealthObserver] = []
     
-    var score: Int {
+    var health: Int {
         didSet {
             for observer in observers {
-                observer.update(score)
+                observer.update(health)
             }
         }
     }
@@ -31,16 +31,16 @@ class Score {
     
     init() {
         observers = []
-        score = 0
+        health = 3
     }
     
     // MARK: - Functions
     
-    func attach(observer: ScoreObserver) {
+    func attach(observer: HealthObserver) {
         observers.append(observer)
     }
     
-    func detach(observer: ScoreObserver) {
+    func detach(observer: HealthObserver) {
         if let index = observers.index(where: { $0.id == observer.id }) {
             observers.remove(at: index)
         }

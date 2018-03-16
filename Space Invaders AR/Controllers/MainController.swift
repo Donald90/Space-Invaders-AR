@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainController.swift
 //  Space Invaders AR
 //
 //  Created by Francesco Chiusolo on 27/02/2018.
@@ -11,7 +11,7 @@ import SpriteKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController {
+class MainController: UIViewController {
     
     // MARK: - Outlets
     
@@ -19,11 +19,7 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    var score: Score?
-    
-    var level: Level?
-    
-    var overlay: Overlay?
+    var game: Game?
     
     // MARK: - UIViewController
     
@@ -37,6 +33,9 @@ class ViewController: UIViewController {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        
+        // Init the game object
+        game = Game(view: view, playerDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +46,8 @@ class ViewController: UIViewController {
         
         // Run the view's session
         sceneView.session.run(configuration)
+        
+        // TODO: Start loading game assets here.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,16 +57,11 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-    
     // MARK: - Actions
     
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-        if let level = level {
-            level.tap()
+        if let game = game {
+            game.tap()
         }
     }
     
@@ -73,7 +69,7 @@ class ViewController: UIViewController {
 
 // MARK: - LevelDelegate
 
-extension ViewController: PlayerDelegate {
+extension MainController: PlayerDelegate {
     
     var position: SCNVector3 {
         guard let transform = sceneView.session.currentFrame?.camera.transform else { return SCNVector3Zero }
@@ -91,47 +87,57 @@ extension ViewController: PlayerDelegate {
 
 // MARK: - ARSessionDelegate
 
-extension ViewController: ARSessionDelegate {
+extension MainController: ARSessionDelegate {
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         switch camera.trackingState {
-        case .normal:
-            print("Ready")
-            if level == nil {
-                score = Score()
+            
+        case .notAvailable:
+            print("WTF 😨")
+            
+        case .limited(let reason):
+            switch reason {
                 
-                // Set the current level
-                level = Level(playerScore: score!, playerDelegate: self)
-                sceneView.scene = level!
+            case .initializing:
+                print("I've heard something...look around")
                 
-                // Set the overlay HUD
-                overlay = Overlay(size: view.bounds.size)
-                sceneView.overlaySKScene = overlay
+            case .excessiveMotion:
+                print("Baby slow down the so o o o o ou o o o o ou o o o o ieeeee baby slow down the song")
                 
-                score!.attach(observer: overlay!)
+            case .insufficientFeatures:
+                print("🕯🕯🕯")
             }
-        default:
-            print("Not ready")
+            
+        case .normal:
+            print("AR ready")
+            guard let game = game, game.state == .ready else {
+                return
+            }
+            
+            sceneView.scene = game.scene
+            sceneView.overlaySKScene = game.hud
+            
+            game.start()
         }
     }
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        guard let level = level else { return }
+        guard let game = game else { return }
         
         let cameraPosition = frame.camera.transform.position
-        level.update(player: cameraPosition)
+        game.update(player: cameraPosition)
     }
     
 }
 
 // MARK: - ARSCNViewDelegate
 
-extension ViewController: ARSCNViewDelegate {
+extension MainController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        guard let level = level else { return }
+        guard let game = game else { return }
         
-        level.update(updateAtTime: time)
+        game.update(updateAtTime: time)
     }
     
 }

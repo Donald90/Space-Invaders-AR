@@ -11,19 +11,13 @@ import SceneKit
 
 class Radar {
     
-    // MARK: - Types
-    
-    enum Direction {
-        case front, right, behind, left, unknown
-    }
-    
     // MARK: - Initializers
     
     init() {}
     
     // MARK: - Updating
     
-    func update(deltaTime: TimeInterval, player: SCNVector3, target: SCNVector3) -> Direction {
+    func update(deltaTime: TimeInterval, player: SCNVector3, target: SCNVector3) -> DirectionValue {
         // Calculate the cross product of the two vectors projected on the (x, z) axis
         // like if we see them from the top.
         let crossProduct = SIVector2.cross(heading: player, target: target)

@@ -1,11 +1,12 @@
 //
-//  Level.swift
+//  Game.swift
 //  Space Invaders AR
 //
 //  Created by Francesco Chiusolo on 27/02/2018.
 //  Copyright © 2018 Francesco Chiusolo. All rights reserved.
 //
 
+import SpriteKit
 import SceneKit
 
 protocol PlayerDelegate {
@@ -13,36 +14,73 @@ protocol PlayerDelegate {
     var orientation: SCNVector3 { get }
 }
 
-class Level: SCNScene {
+class Game: NSObject {
+    
+    // MARK: - Types
+    
+    enum State {
+        case loading
+        case ready
+        case running
+        case paused
+        case over
+    }
     
     // MARK: - Properties
     
+    private var _state: State
+    
+    var state: State {
+        return _state
+    }
+    
+    public let scene: SCNScene
+    
+    public let hud: SKScene
+    
+    private let radar: Radar
+    
+    // MARK: Gameplay utils
+    
     // Last time an Enemy has been spawned
-    var lastSpawnTime: TimeInterval?
+    private var lastSpawnTime: TimeInterval?
     
     // Last time the scene has been updated
-    var lastUpdateTime: TimeInterval?
+    private var lastUpdateTime: TimeInterval?
     
     // Player delegate from which get informations about player
-    let playerDelegate: PlayerDelegate
+    private let playerDelegate: PlayerDelegate
     
-    let playerScore: Score
+    // MARK: Models
     
-    var enemies: [Enemy] = []
+    private var score: Score
     
-    var player = Player()
+    // MARK: Entities
     
-    let radar = Radar()
+    private var enemies: [Enemy]
+    
+    private let player: Player
     
     // MARK: - Initializers
     
-    init(playerScore: Score, playerDelegate: PlayerDelegate) {
-        self.playerScore = playerScore
+    init(view: UIView, playerDelegate: PlayerDelegate) {
         self.playerDelegate = playerDelegate
-        super.init()
-        physicsWorld.contactDelegate = self
         
-        rootNode.addChildNode(player)
+        self._state = .ready
+        
+        self.score = Score()
+        
+        self.scene = SCNScene()
+        self.hud = HUD(size: view.bounds.size, score: self.score)
+        
+        self.enemies = []
+        self.player = Player()
+        self.radar = Radar()
+        
+        super.init()
+        
+        self.scene.physicsWorld.contactDelegate = self
+        self.scene.rootNode.addChildNode(player)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,7 +89,19 @@ class Level: SCNScene {
     
     // MARK: - Gameplay
     
+    func start() {
+        _state = .running
+    }
+    
+    func pause() {
+        _state = .paused
+    }
+    
     func update(updateAtTime time: TimeInterval) {
+        guard _state == .running else {
+            return
+        }
+        
         // If lastSpawnTime and lastUpdateTime are undefined, assign them
         // the update time. This happens only the at the first update so we can skip it.
         guard let lastSpawnTime = self.lastSpawnTime,
@@ -98,7 +148,7 @@ class Level: SCNScene {
     func tap() {
         // Create a bullet and add it to the scene
         let bullet = Bullet.build(at: playerDelegate.position)
-        rootNode.addChildNode(bullet)
+        scene.rootNode.addChildNode(bullet)
         
         // Shoot the bullet
         bullet.shoot(toward: playerDelegate.orientation)
@@ -114,7 +164,7 @@ class Level: SCNScene {
 
 // MARK: - SCNPhysicsContactDelegate
 
-extension Level: SCNPhysicsContactDelegate {
+extension Game: SCNPhysicsContactDelegate {
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         // Check which of the two nodes is an enemy and which a bullet
@@ -143,9 +193,9 @@ extension Level: SCNPhysicsContactDelegate {
         let (explosion, killed) = enemy.hit(by: bullet, at: contact.contactPoint)
         
         // Add the explosion to the scene and remove the enemy if it is dead
-        rootNode.addChildNode(explosion)
+        scene.rootNode.addChildNode(explosion)
         if killed {
-            playerScore.score += enemy.points
+            score.score += enemy.points
             
             remove(enemy: enemy)
         }
@@ -157,7 +207,7 @@ extension Level: SCNPhysicsContactDelegate {
         // Remove the player if it is dead
         let killed = player.hit(by: enemy, at: contact.contactPoint)
         if killed {
-            playerScore.score = 0
+            score.score = 0
             player.removeFromParentNode()
             // TODO: Game Over
         }
@@ -190,10 +240,10 @@ extension Level: SCNPhysicsContactDelegate {
 
 // MARK: - Utils
 
-extension Level {
+extension Game {
     
     func add(enemy: Enemy) {
-        rootNode.addChildNode(enemy)
+        scene.rootNode.addChildNode(enemy)
         enemies.append(enemy)
     }
     
