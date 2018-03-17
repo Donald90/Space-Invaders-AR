@@ -14,6 +14,8 @@ class HUD: SKScene {
     
     var scoreNode: SKLabelNode!
     
+    var directionNode: SKLabelNode!
+    
     // MARK: - Initializers
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,17 +31,24 @@ class HUD: SKScene {
         scoreNode.fontSize = 24
         scoreNode.position = CGPoint(x: size.width / 2, y: 24 + 8)
         
+        directionNode = SKLabelNode(text: "")
+        directionNode.fontColor = UIColor.black
+        directionNode.fontSize = 24
+        directionNode.position = CGPoint(x: size.width / 2, y: size.height - 24 - 8)
+        
         addChild(scoreNode)
+        addChild(directionNode)
     }
     
-    convenience init(size: CGSize, score: Score) {
+    convenience init(size: CGSize, score: Score, direction: Direction) {
         self.init(size: size)
         score.attach(observer: self)
+        direction.attach(observer: self)
     }
     
 }
 
-// MARK: - PlayerScoreObserver
+// MARK: - ScoreObserver
 
 extension HUD: ScoreObserver {
     
@@ -49,6 +58,16 @@ extension HUD: ScoreObserver {
     
     func update(_ score: Int) {
         scoreNode.text = String(score)
+    }
+    
+}
+
+// MARK: - DirectionObserver
+
+extension HUD: DirectionObserver {
+    
+    func update(_ value: DirectionValue) {
+        directionNode.text = value.rawValue
     }
     
 }

@@ -55,6 +55,8 @@ class Game: NSObject {
     
     private var score: Score
     
+    private var direction: Direction
+    
     // MARK: Entities
     
     private var enemies: [Enemy]
@@ -69,9 +71,10 @@ class Game: NSObject {
         self._state = .ready
         
         self.score = Score()
+        self.direction = Direction()
         
         self.scene = SCNScene()
-        self.hud = HUD(size: view.bounds.size, score: self.score)
+        self.hud = HUD(size: view.bounds.size, score: self.score, direction: self.direction)
         
         self.enemies = []
         self.player = Player()
@@ -133,8 +136,7 @@ class Game: NSObject {
         
         // Update the radar
         if enemies.count > 0 {
-            let direction = radar.update(deltaTime: deltaTime, player: player.position, target: enemies[0].position)
-            debugPrint(direction)
+            direction.value = radar.update(deltaTime: deltaTime, player: player.position, target: enemies[0].position)
         }
         
         // Update lastUpdateTime to match this current time

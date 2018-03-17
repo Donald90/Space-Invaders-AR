@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Types
 
-enum DirectionValue {
+enum DirectionValue: String {
     case front, right, behind, left, unknown
 }
 
@@ -31,8 +31,10 @@ class Direction {
     
     var value: DirectionValue {
         didSet {
-            for observer in observers {
-                observer.update(value)
+            if oldValue != value {
+                for observer in observers {
+                    observer.update(value)
+                }
             }
         }
     }

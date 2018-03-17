@@ -67,7 +67,7 @@ class MainController: UIViewController {
     
 }
 
-// MARK: - LevelDelegate
+// MARK: - PlayerDelegate
 
 extension MainController: PlayerDelegate {
     
