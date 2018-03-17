@@ -19,6 +19,8 @@ class MainController: UIViewController {
     
     // MARK: - Properties
     
+    var lastRenderTime: TimeInterval?
+    
     var game: Game?
     
     // MARK: - UIViewController
@@ -137,7 +139,19 @@ extension MainController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard let game = game else { return }
         
-        game.update(updateAtTime: time)
+        // If lastUpdateTime is undefined, assign it
+        // the update time. This happens only the at the first update so we can skip it.
+        guard let lastRenderTime = self.lastRenderTime else {
+            self.lastRenderTime = time
+            return
+        }
+        
+        // Update the game by the amount of time since last update
+        let deltaTime = time - lastRenderTime
+        game.update(deltaTime: deltaTime)
+        
+        // Update lastUpdateTime to match this current time
+        self.lastRenderTime = time
     }
     
 }

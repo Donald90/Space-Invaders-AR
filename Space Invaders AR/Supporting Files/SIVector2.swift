@@ -23,21 +23,21 @@ class SIVector2 {
         self.y = y
     }
     
-    convenience init(view vector: SCNVector3) {
+    convenience init(from vector: SCNVector3) {
         // The vector as seen from the above
         self.init(x: vector.x, y: vector.z)
     }
     
     // MARK: - Operations
     
-    static func cross(heading a: SIVector2, target b: SIVector2) -> Float {
+    static func cross(_ a: SIVector2, _ b: SIVector2) -> Float {
         return (a.x * b.y) - (a.y * b.x)
     }
     
-    static func cross(heading a: SCNVector3, target b: SCNVector3) -> Float {
-        let a2D = SIVector2(view: a)
-        let b2D = SIVector2(view: b)
-        return SIVector2.cross(heading: a2D, target: b2D)
+    static func cross(_ a: SCNVector3, _ b: SCNVector3) -> Float {
+        let a2D = SIVector2(from: a)
+        let b2D = SIVector2(from: b)
+        return SIVector2.cross(a2D, b2D)
     }
     
     func module() -> Float {

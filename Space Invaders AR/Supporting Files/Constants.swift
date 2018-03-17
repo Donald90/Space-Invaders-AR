@@ -19,12 +19,12 @@ struct Constants {
     
     // Expressed as m
     enum Space: Float {
-        case enemySpawnDistance = 2
+        case enemySpawnDistance = 3
     }
     
     // Expressed as m/s
     enum Velocity: Float {
-        case enemy = 0.1
+        case enemy = 0.01
     }
     
     enum Life: Int {

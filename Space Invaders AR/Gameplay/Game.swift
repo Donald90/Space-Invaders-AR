@@ -42,12 +42,6 @@ class Game: NSObject {
     
     // MARK: Gameplay utils
     
-    // Last time an Enemy has been spawned
-    private var lastSpawnTime: TimeInterval?
-    
-    // Last time the scene has been updated
-    private var lastUpdateTime: TimeInterval?
-    
     // Player delegate from which get informations about player
     private let playerDelegate: PlayerDelegate
     
@@ -100,47 +94,29 @@ class Game: NSObject {
         _state = .paused
     }
     
-    func update(updateAtTime time: TimeInterval) {
+    func update(deltaTime: TimeInterval) {
         guard _state == .running else {
             return
         }
         
-        // If lastSpawnTime and lastUpdateTime are undefined, assign them
-        // the update time. This happens only the at the first update so we can skip it.
-        guard let lastSpawnTime = self.lastSpawnTime,
-            let lastUpdateTime = self.lastUpdateTime else {
-                self.lastSpawnTime = time
-                self.lastUpdateTime = time
-                return
-        }
-        
-        // Retrieve player position
         let playerPosition = playerDelegate.position
         
-        // Spawn an enemy every Constants.Time.enemySpawnInterval
-        let deltaSpawnTime = time - lastSpawnTime
-        if deltaSpawnTime >= Constants.Time.enemySpawnInterval.rawValue {
-            // Update lastSpawnTime to match this current time
-            self.lastSpawnTime = time
-            
+        // Spawn a new enemy if none of them is around
+        if enemies.count == 0 {
             let enemy = Enemy.spawn(whenPlayerIsAt: playerPosition)
             add(enemy: enemy)
         }
         
-        let deltaTime = time - lastUpdateTime
-        
         // Let every enemy follow the player
         for enemy in enemies {
+            // TODO: Bind the enemy to the player so that we don't need to pass it every time
             enemy.follow(player: playerPosition, deltaTime: deltaTime)
         }
         
         // Update the radar
         if enemies.count > 0 {
-            direction.value = radar.update(deltaTime: deltaTime, player: player.position, target: enemies[0].position)
+            direction.value = radar.update(deltaTime: deltaTime, heading: playerDelegate.orientation, target: enemies[0].position)
         }
-        
-        // Update lastUpdateTime to match this current time
-        self.lastUpdateTime = time
     }
     
     func update(player position: SCNVector3) {

@@ -17,10 +17,10 @@ class Radar {
     
     // MARK: - Updating
     
-    func update(deltaTime: TimeInterval, player: SCNVector3, target: SCNVector3) -> DirectionValue {
+    func update(deltaTime: TimeInterval, heading: SCNVector3, target: SCNVector3) -> DirectionValue {
         // Calculate the cross product of the two vectors projected on the (x, z) axis
         // like if we see them from the top.
-        let crossProduct = SIVector2.cross(heading: player, target: target)
+        let crossProduct = SIVector2.cross(heading, target)
         
         // Based on the cross product result, return the direction
         if crossProduct == 0 {
